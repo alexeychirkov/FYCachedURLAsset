@@ -55,6 +55,8 @@ FYCachedURLAssetCacheInfo;
  */
 + (instancetype)cachedURLAssetWithURL:(NSURL *)url cacheFilePath:(NSString *)path;
 
++ (instancetype)cachedURLAssetWithURL:(NSURL *)url cacheFilePath:(NSString *)path options:(nullable NSDictionary<NSString *, id> *)options;
+
 - (void)cancel;
 
 - (void)removeCache;

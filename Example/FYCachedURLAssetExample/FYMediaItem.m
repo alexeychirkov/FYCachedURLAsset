@@ -31,17 +31,18 @@ static NSString *MediaNameArchiveKey = @"mediaName";
 static NSString *MediaUrlArchiveKey = @"mediaUrl";
 static NSString *MediaSizeArchiveKey = @"mediaSize";
 static NSString *MediaLengthArchiveKey = @"mediaLength";
-    
+
 @synthesize itemType;
-    
-- (instancetype)initWithMediaName:(NSString*)mediaName mediaUrl:(NSString*)mediaUrl mediaSize:(int64_t)mediaSize mediaLength:(int32_t)mediaLength {
+
+- (instancetype)initWithMediaName:(NSString *)mediaName mediaUrl:(NSString *)mediaUrl mediaSize:(int64_t)mediaSize mediaLength:(int32_t)mediaLength cacheFilePath:(NSString *)cacheFilePath {
     if (self = [super init]) {
         _mediaName = mediaName;
         _mediaURL = mediaUrl;
 		_mediaSize = mediaSize;
 		_mediaLength = mediaLength;
+		_cacheFilePath = cacheFilePath;
     }
-    
+
     return self;
 }
 
@@ -58,10 +59,14 @@ static NSString *MediaLengthArchiveKey = @"mediaLength";
 }
 
 - (NSString*)cacheFilePath {
+	if (_cacheFilePath.length > 0) {
+		return _cacheFilePath;
+	}
+
 	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 	NSString *cacheFileName = [self sanitizeFileNameString:_mediaURL];
 	NSString *cacheFilePath = [documentsPath stringByAppendingPathComponent:cacheFileName];
-	
+
 	return cacheFilePath;
 }
 
@@ -76,7 +81,7 @@ static NSString *MediaLengthArchiveKey = @"mediaLength";
 	int remainder = seconds % 3600;
 	int minutes = remainder / 60;
 	seconds = remainder % 60;
-	
+
 	if (hours > 0) {
 		return [NSString stringWithFormat:@"%dh %dm %ds", hours, minutes, seconds];
 	} else if (minutes > 0) {

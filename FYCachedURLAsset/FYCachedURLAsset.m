@@ -43,19 +43,27 @@ NSString *const FYResourceForURLDoesntExistNotificationName = @"FYResourceForURL
 
 #pragma mark - Lifecycle
 
-+ (instancetype)cachedURLAssetWithURL:(NSURL *)url cacheFilePath:(NSString *)path
++ (instancetype)cachedURLAssetWithURL:(NSURL *)url cacheFilePath:(NSString *)path {
+	return [FYCachedURLAsset cachedURLAssetWithURL:url cacheFilePath:path options:nil];
+}
+		
++ (instancetype)cachedURLAssetWithURL:(NSURL *)url cacheFilePath:(NSString *)path options:(nullable NSDictionary<NSString *, id> *)options
 {
 	// Don't allow nil path.
 	path = path.length > 0 ? path : @"";
 	
-	FYCachedURLAsset *asset = [[self alloc] initWithURL:url cacheFilePath:path];
+	FYCachedURLAsset *asset = [[self alloc] initWithURL:url cacheFilePath:path options:options];
 	return asset;
 }
 
-- (instancetype)initWithURL:(NSURL*)URL cacheFilePath:(NSString*)cacheFilePath
+- (instancetype)initWithURL:(NSURL*)URL cacheFilePath:(NSString*)cacheFilePath options:(nullable NSDictionary<NSString *, id> *)options
 {
 	NSURL* customURL = [FYCachedURLAsset URL:URL withCustomScheme:@"streaming"];
-	if (self = [super initWithURL:customURL options:@{ AVURLAssetReferenceRestrictionsKey : @(AVAssetReferenceRestrictionForbidAll) }])
+	NSMutableDictionary *dictionary = [@{ AVURLAssetReferenceRestrictionsKey : @(AVAssetReferenceRestrictionForbidAll) } mutableCopy];
+	if (options) {
+		[dictionary addEntriesFromDictionary:options];
+	}
+	if (self = [super initWithURL:customURL options:dictionary])
 	{
 		FYLogD(@"ASSET INIT\n  URL: %@\n  cacheFilePath: %@", URL, cacheFilePath);
 		

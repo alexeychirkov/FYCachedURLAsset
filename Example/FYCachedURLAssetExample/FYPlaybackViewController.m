@@ -138,11 +138,18 @@
 		cachedAmount = 1.0 * asset.cacheInfo.availableDataOnDisk / asset.cacheInfo.contentLength;
 		
 		_progressViewWidthConstraint.constant = cachedAmount * _timeSlidedTrackView.frame.size.width;
+
+        _cachedLabel.text = [NSString stringWithFormat:@"%d%% (%@) Cached", (int)(cachedAmount * 100), [self sizeToReadableString:asset.cacheInfo.availableDataOnDisk]];
 	} else {
-		_progressViewWidthConstraint.constant = 0;
+        _cachedLabel.text = @"No data";
+        _progressViewWidthConstraint.constant = 0;
 	}
 	
-	_cachedLabel.text = [NSString stringWithFormat:@"%d%% Cached", (int)(cachedAmount * 100)];
+
+}
+
+- (NSString*)sizeToReadableString:(int64_t)bytes {
+	return [NSString stringWithFormat:@"%.03f MB", bytes / 1024.0 / 1024.0];
 }
 
 - (IBAction)timeSliderValueChanged:(UISlider *)sender {
@@ -196,7 +203,18 @@
 		
 		NSLog(@"Player state is: %@", @[@"Unknown", @"Ready to Play", @"Failed"][newStatus]);
 	} else if ([keyPath isEqualToString:@"loadedTimeRanges"]){
-		
+        NSValue *timeRange = _player.currentItem.loadedTimeRanges.firstObject;
+        if (timeRange) {
+            CMTimeRange timeRangeValue = [timeRange CMTimeRangeValue];
+            Float64 bufferedSeconds = CMTimeGetSeconds(timeRangeValue.duration);
+            NSLog(@"bufferedSeconds : %f", bufferedSeconds);
+            if (bufferedSeconds > _player.currentItem.preferredForwardBufferDuration) {
+                NSLog(@"Will play!");
+                if (_isPlaying) {
+                    [_player play];
+                }
+            }
+        }
 	} else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
 		if (_player.currentItem.playbackLikelyToKeepUp) {
 			if (_isPlaying) {
@@ -207,11 +225,13 @@
 		AVPlayerItem *item = change[NSKeyValueChangeOldKey];
 		
 		[item removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
-		
+		[item removeObserver:self forKeyPath:@"loadedTimeRanges"];
+
 		AVPlayerItem *newItem = change[NSKeyValueChangeNewKey];
 		
 		[newItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:NULL];
 	}
+    [self printAVPlayerItemStatus:_player.currentItem];
 }
 
 #pragma mark - Private
@@ -266,9 +286,12 @@
 	
 	NSString *cacheFilePath = _mediaItem.cacheFilePath;
 	
-	FYCachedURLAsset *asset = [FYCachedURLAsset cachedURLAssetWithURL:URL cacheFilePath:cacheFilePath];
+	FYCachedURLAsset *asset = [FYCachedURLAsset cachedURLAssetWithURL:URL cacheFilePath:cacheFilePath options:@{
+			@"AVURLAssetOutOfBandMIMETypeKey" : @"video/mp4"
+	}];
 	AVPlayerItem *newItem = [[AVPlayerItem alloc] initWithAsset:asset];
-	
+    newItem.preferredForwardBufferDuration = 1.5f;
+	[self printAVPlayerItemStatus:newItem];
 	[asset loadValuesAsynchronouslyForKeys:@[@"playable"] completionHandler:^() {
 		__typeof(weakSelf) __strong strongSelf = weakSelf;
 		
@@ -293,7 +316,9 @@
 		}
 	} else {
 		_player = [AVPlayer playerWithPlayerItem:newItem];
-		[newItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:NULL];
+        _player.automaticallyWaitsToMinimizeStalling = NO;
+        [newItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:NULL];
+		[newItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:NULL];
 		[_player addObserver:self forKeyPath:@"currentItem" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
 		if (_isPlaying) {
 			[_player play];
@@ -317,6 +342,32 @@
 			}
 		}];
 	}
+}
+
+- (void)printAVPlayerItemStatus:(AVPlayerItem *)playerItem {
+    NSLog(@"========================================================");
+	NSLog(@"playbackLikelyToKeepUp : %i", playerItem.playbackLikelyToKeepUp);
+	NSLog(@"playbackBufferFull : %i", playerItem.playbackBufferFull);
+	NSLog(@"playbackBufferEmpty : %i", playerItem.playbackBufferEmpty);
+	NSLog(@"canUseNetworkResourcesForLiveStreamingWhilePaused : %i", playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused);
+	NSLog(@"preferredForwardBufferDuration : %f", playerItem.preferredForwardBufferDuration);
+    NSLog(@"loadedTimeRanges : %@", _player.currentItem.loadedTimeRanges);
+    NSLog(@"reasonForWaitingToPlay : %@", _player.reasonForWaitingToPlay);
+    NSLog(@"rate : %f", _player.rate);
+    switch (_player.timeControlStatus) {
+        case AVPlayerTimeControlStatusPaused:{
+            NSLog(@"timeControlStatus : AVPlayerTimeControlStatusPaused");
+            break;
+        }
+        case AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate:{
+            NSLog(@"timeControlStatus : AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate");
+            break;
+        }
+        case AVPlayerTimeControlStatusPlaying:{
+            NSLog(@"timeControlStatus : AVPlayerTimeControlStatusPlaying");
+            break;
+        }
+    }
 }
 
 - (void)createAudioAnimation {

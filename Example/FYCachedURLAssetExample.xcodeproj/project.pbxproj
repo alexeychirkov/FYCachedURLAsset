@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1706CCD2BA8CFFF900AEFAED /* libPods-FYCachedURLAssetExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61CE234FDB801916F7C6DA24 /* libPods-FYCachedURLAssetExample.a */; };
 		1E7939641F289E6300E12E56 /* FYHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7939631F289E6300E12E56 /* FYHeaderCell.m */; };
 		1E79396B1F28A1ED00E12E56 /* FYMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79396A1F28A1ED00E12E56 /* FYMediaItem.m */; };
 		1E79396E1F28A1FA00E12E56 /* FYHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79396D1F28A1FA00E12E56 /* FYHeaderItem.m */; };
@@ -31,7 +32,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
-		CB0F558305E329229AC9A0CA /* Pods_FYCachedURLAssetExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832DF2E3DD6C36AA4C46AA00 /* Pods_FYCachedURLAssetExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +81,7 @@
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* FYCachedURLAssetExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FYCachedURLAssetExample-Prefix.pch"; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		832DF2E3DD6C36AA4C46AA00 /* Pods_FYCachedURLAssetExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FYCachedURLAssetExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61CE234FDB801916F7C6DA24 /* libPods-FYCachedURLAssetExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FYCachedURLAssetExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8605CA702A006533A5EC7AA6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F2CE245D4C3CBA75C924E5EC /* Pods-FYCachedURLAssetExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FYCachedURLAssetExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-FYCachedURLAssetExample/Pods-FYCachedURLAssetExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				CB0F558305E329229AC9A0CA /* Pods_FYCachedURLAssetExample.framework in Frameworks */,
+				1706CCD2BA8CFFF900AEFAED /* libPods-FYCachedURLAssetExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +215,7 @@
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
-				832DF2E3DD6C36AA4C46AA00 /* Pods_FYCachedURLAssetExample.framework */,
+				61CE234FDB801916F7C6DA24 /* libPods-FYCachedURLAssetExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,8 +264,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				31F2CC1E1F4AA37F140D9C6F /* [CP] Embed Pods Frameworks */,
-				B90FECA9469B1AF89A2FE9E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -287,7 +285,7 @@
 				ORGANIZATIONNAME = "Viktor Naryshkin";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = JNH9EQH57T;
+						DevelopmentTeam = L55G758PXG;
 					};
 				};
 			};
@@ -325,49 +323,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31F2CC1E1F4AA37F140D9C6F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FYCachedURLAssetExample/Pods-FYCachedURLAssetExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		895FADC1524817C1D4B882E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FYCachedURLAssetExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B90FECA9469B1AF89A2FE9E4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FYCachedURLAssetExample/Pods-FYCachedURLAssetExample-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -459,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -492,7 +463,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -504,7 +475,7 @@
 			baseConfigurationReference = 54AB1BC70583170D91F746DF /* Pods-FYCachedURLAssetExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JNH9EQH57T;
+				DEVELOPMENT_TEAM = L55G758PXG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FYCachedURLAssetExample/FYCachedURLAssetExample-Prefix.pch";
 				INFOPLIST_FILE = "FYCachedURLAssetExample/FYCachedURLAssetExample-Info.plist";
@@ -520,7 +491,7 @@
 			baseConfigurationReference = F2CE245D4C3CBA75C924E5EC /* Pods-FYCachedURLAssetExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JNH9EQH57T;
+				DEVELOPMENT_TEAM = L55G758PXG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FYCachedURLAssetExample/FYCachedURLAssetExample-Prefix.pch";
 				INFOPLIST_FILE = "FYCachedURLAssetExample/FYCachedURLAssetExample-Info.plist";

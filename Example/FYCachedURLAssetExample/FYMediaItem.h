@@ -31,16 +31,15 @@
     
 @property (nonatomic) NSString *mediaName;
 @property (nonatomic) NSString *mediaURL;
+@property (nonatomic) NSString *cacheFilePath;
 @property (nonatomic) int64_t mediaSize;
 @property (nonatomic) int32_t mediaLength;
 
-- (instancetype)initWithMediaName:(NSString*)mediaName mediaUrl:(NSString*)mediaUrl mediaSize:(int64_t)mediaSize mediaLength:(int32_t)mediaLength;
+- (instancetype)initWithMediaName:(NSString *)mediaName mediaUrl:(NSString *)mediaUrl mediaSize:(int64_t)mediaSize mediaLength:(int32_t)mediaLength cacheFilePath:(NSString *)cacheFilePath;
 
 - (NSString*)mediaSizeReadable;
 - (NSString*)mediaLengthReadable;
 
 - (BOOL)hasMediaLength;
-
-- (NSString*)cacheFilePath;
 
 @end

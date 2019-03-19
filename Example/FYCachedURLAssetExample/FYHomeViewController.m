@@ -157,21 +157,31 @@ UITableViewDataSource
     [rowsDatasource addObject:[[FYSectionItem alloc] initWithText:@"MEDIA FILES EXAMPLES"]];
 	
 	[rowsDatasource addObject:[FYSeparatorItem new]];
-	
-	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Crowd Cheering.mp3" mediaUrl:@"http://www.sample-videos.com/audio/mp3/crowd-cheering.mp3" mediaSize:443926 mediaLength:27]];
-	
-	[rowsDatasource addObject:[FYSeparatorItem new]];
-    
-    [rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Wave.mp3" mediaUrl:@"http://www.sample-videos.com/audio/mp3/wave.mp3" mediaSize:725240 mediaLength:45]];
+
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Crowd Cheering.mp3" mediaUrl:@"http://www.sample-videos.com/audio/mp3/crowd-cheering.mp3" mediaSize:443926 mediaLength:27 cacheFilePath:nil]];
 	
 	[rowsDatasource addObject:[FYSeparatorItem new]];
-	
-    [rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Big Buck Bunny.mp4" mediaUrl:@"http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_10mb.mp4" mediaSize:10498677 mediaLength:62]];
+
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Wave.mp3" mediaUrl:@"http://www.sample-videos.com/audio/mp3/wave.mp3" mediaSize:725240 mediaLength:45 cacheFilePath:nil]];
 	
 	[rowsDatasource addObject:[FYSeparatorItem new]];
+
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Big Buck Bunny.mp4" mediaUrl:@"https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4" mediaSize:10498677 mediaLength:62 cacheFilePath:nil]];
 	
-    [rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Big Buck Bunny.mp4" mediaUrl:@"http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4" mediaSize:31491130 mediaLength:170]];
+	[rowsDatasource addObject:[FYSeparatorItem new]];
+
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"Big Buck Bunny.mp4" mediaUrl:@"https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_30mb.mp4" mediaSize:31491130 mediaLength:170 cacheFilePath:nil]];
 	
+	[rowsDatasource addObject:[FYSeparatorItem new]];
+
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"mov file" mediaUrl:@"http://file-examples.com/wp-content/uploads/2018/04/file_example_MOV_1920_2_2MB.mov" mediaSize:(int)(2.2f * 1024.0f * 1024.0f) mediaLength:30 cacheFilePath:nil]];
+
+	[rowsDatasource addObject:[FYSeparatorItem new]];
+
+	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	NSString *cacheFilePath = [documentsPath stringByAppendingPathComponent:@"hi25.mp4"];
+	[rowsDatasource addObject:[[FYMediaItem alloc] initWithMediaName:@"hi25" mediaUrl:@"https://s3-eu-west-1.amazonaws.com/storychat-pix-video-prod/330869/0?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ3FGVFKFVFEEJPRQ/20190319/eu-west-1/s3/aws4_request&X-Amz-Date=20190319T102701Z&X-Amz-Expires=90000&X-Amz-SignedHeaders=host&X-Amz-Signature=a6f6a62744f9d0273aa67439e3d6ab3969bc09c06353e1cc3f43f7e1c181c05b" mediaSize:1005702 mediaLength:10 cacheFilePath:cacheFilePath]];
+
 	if (_userMediaFiles.count > 0) {
 		[rowsDatasource addObject:[FYSeparatorItem new]];
 		
@@ -193,7 +203,7 @@ UITableViewDataSource
 	if (url && [url scheme] && [url host]) {
 		NSString* mediaName = ([url lastPathComponent].length > 0) ? [url lastPathComponent] : [url absoluteString];
 		
-		FYMediaItem* mediaItem = [[FYMediaItem alloc] initWithMediaName:mediaName mediaUrl:[url absoluteString] mediaSize:0 mediaLength:0];
+		FYMediaItem* mediaItem = [[FYMediaItem alloc] initWithMediaName:mediaName mediaUrl:[url absoluteString] mediaSize:0 mediaLength:0 cacheFilePath:nil];
 		
 		[_userMediaFiles addObject:mediaItem];
 		
