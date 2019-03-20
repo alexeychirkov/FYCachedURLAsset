@@ -64,7 +64,7 @@ static NSMutableSet* g_FYContentProviders = nil;
 	{
 		if ([cp.cacheFilePath isEqualToString:cacheFilePath])
 		{
-			NSAssert([cp.URL isEqual:URL], @"Different URL is already being cached into this path");
+//			NSAssert([cp.URL isEqual:URL], @"Different URL is already being cached into this path");
 			contentProvider = cp;
 			break;
 		}
